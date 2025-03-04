@@ -1,13 +1,15 @@
 import { useRef, useState } from "react";
-import Line from "./Line";
-import execute from "./commands";
+import { Line } from "./Line";
+import { execute, banner } from "../logic/commands";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Terminal() {
+const prompt = "Terminal@web>";
+
+export function Terminal() {
     const [input, setInput] = useState("");
     const inputRef = useRef(null);
 
-    const [history, addHistory] = useState([]);
+    const [history, addHistory] = useState([...banner().map((line) => ({text: line, key: uuidv4(), animate: true}))]);
 
     const [commandHistory, addCommand] = useState([]);
     const cHistoryRef = useRef(0);
@@ -18,13 +20,25 @@ export default function Terminal() {
             case "Enter":
                 if (input === "clear") {
                     addHistory([]);
+                } else if (input === "") {
+                    addHistory((prev) => [
+                        ...prev,
+                        { text: `${prompt} ${input}`, key: uuidv4(), animate: false }
+                    ]);
                 } else {
-                    addHistory((prev) => [...prev, "\nroot> " + input, ...execute(input)]);
+                    addHistory((prev) => [
+                        ...prev,
+                        { text: `${prompt} ${input}`, key: uuidv4(), animate: false },
+                        ...execute(input).map((line) => ({ text: line, key: uuidv4(), animate: true }))
+                    ]);
                 }
                 
-                addCommand((prev) => [...prev, input]);
-                setInput("");
-                cHistoryRef.current = commandHistory.length + 1;
+                if (input !== "") {
+                    addCommand((prev) => [...prev, input]);
+                    cHistoryRef.current = commandHistory.length + 1;
+                    setInput("");
+                }
+
                 break;
             
             case "ArrowUp":
@@ -34,7 +48,7 @@ export default function Terminal() {
 
                     setTimeout(() => {
                         inputRef.current.setSelectionRange(lastCommand.length, lastCommand.length);
-                    }, 1);
+                    }, .1);
                 }
                 break;
 
@@ -45,7 +59,7 @@ export default function Terminal() {
 
                     setTimeout(() => {
                         inputRef.current.setSelectionRange(lastCommand.length, lastCommand.length);
-                    }, 1);
+                    }, .1);
                 }
                 break;
         }
@@ -56,12 +70,11 @@ export default function Terminal() {
     <div>
         <div id="history">
             {history.map((line, index) => (
-                <Line key={uuidv4()} id={index} text={line} />
+                <Line key={line.key} id={index} text={line.text} animate={line.animate} />
             ))}
         </div>
         <div>
-            <br />
-            <span>root&gt;</span>
+            <span>{prompt}</span>
             <input
                 autoFocus
                 ref={inputRef}

@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.shadow {
+    text-shadow: 0px 0px 5px rgb(102, 206, 76);
+}
+
+.fade-edges {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), rgba(38, 39, 38, 0.932)),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(38, 39, 38, 0.932)),
+                linear-gradient(to left, rgba(0, 0, 0, 0.1), rgba(38, 39, 38, 0.932)),
+                linear-gradient(to right, rgba(0, 0, 0, 0.1), rgba(38, 39, 38, 0.932));
+    background-blend-mode: overlay;
+}

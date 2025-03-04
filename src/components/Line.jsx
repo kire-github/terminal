@@ -22,5 +22,5 @@ export function Line({ id = "", text, animate }) {
     
     
 
-    return <pre id={id}>{visible}</pre>;
+    return <pre className="text-wrap break-words" id={id}>{visible}</pre>;
 }

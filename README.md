@@ -1,12 +1,27 @@
-# React + Vite
+![Alt text](./docs/preview.png)\
+Technologies: React, Vite, Tailwindcss
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Run the project locally with:
+```
+npm run build
+npm run preview
+```
+or with dev tools enabled:
+```
+npm run dev
+```
 
-Currently, two official plugins are available:
+## Project goals
+- [x] Build a terminal-like web application
+- [x] Using React
+- [x] Style it with Tailwindcss
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Main takeaways
+**React:**\
+The biggest obstacles when writing this project stemmed from React's asynchronous style, however most of the problems could be solved with proper useage of the built-in hooks. As a beginner it took some time to get used to which hook to use when, most confusion came from when exactly does a rerender happen, and what gets rerendered, but these have been cleared up decently. It was important to discover how React uses the keys of different elements to reduce the number of elements rerendered.
 
-## Expanding the ESLint configuration
+**Tailwindcss:**\
+Tailwind is powerful because it simplifies the css writing process, however the styling does get moved to the code, making it a bit harder to read, and there do exist certain things that are not achievable with just Tailwind alone.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**Vite:**\
+Although not touched in depth, Vite made project creation and building quick and easy.

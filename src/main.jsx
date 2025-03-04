@@ -6,5 +6,5 @@ import { Terminal } from "./components/Terminal";
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Terminal />
-  </StrictMode>,
+  </StrictMode>
 )
